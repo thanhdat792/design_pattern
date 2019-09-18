@@ -4,16 +4,11 @@
 		- Mục đích : Khi sử dụng 1 chức năng thay vì gọi nhiều phương thức từ nhiều class khác nhau 
 		ta sẽ nhóm chúng lại vào 1 phương thức trong 1 class
 	*/
-
 	class OrderFacade {
-
         private product;
-
         public function __construct($productId) {
-
             $this->product = Product::find($productId);
         }
-
         public function generateOrder() {
             if ($this->checkQuantity()) {
                 $this->addToCart();
@@ -42,7 +37,6 @@
             $order->generateOrder();
         }
     }
-
     // gọi 
     $productId = $_GET['productId'];
 	$order = new OrderFacade($productId);
