@@ -14,9 +14,9 @@
     private $username = 'root';
     private $password = '';
     private $dbName = 'timeline';
-     
+    // gọi $obj = new ConnectDb(); sẽ bị lỗi
     private function __construct() {
-      $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->dbName) or die ('Không thể kết nối tới database');
+     
     }
     
     public static function getInstance() {
@@ -27,6 +27,7 @@
     }
 
     public function getConnection() {
+      $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->dbName) or die ('Không thể kết nối tới database');
       return $this->conn;
     }
   }
@@ -35,7 +36,7 @@
   $conn1 = $instance1->getConnection();
   var_dump($conn1);
 
-  $instance2 = ConnectDb::getInstance();
+  $instance2 = clone $instance1;
   $conn2 = $instance2->getConnection();
   var_dump($conn2);
 ?>
