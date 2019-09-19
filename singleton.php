@@ -6,37 +6,28 @@
         + 1 biến static _instance (mức truy cập private) dùng để kiểm tra xem một instance của class đã được tạo ra hay chưa
         + hàm getInstance trả về instance của class (kiểm tra biến _instance nếu chưa tồn tại thì sẽ tạo ra 1 instance và trả về instance đó)
   */
-  class ConnectDb {
-    private static $instance = null;
-    private $conn;
-    
-    private $host = 'localhost';
-    private $username = 'root';
-    private $password = '';
-    private $dbName = 'timeline';
-    // gọi $obj = new ConnectDb(); sẽ bị lỗi
+  class connectDb {
+    private static $_instance = null;
+    private $_connect;
     private function __construct() {
-     
+      $this->_connect = mysqli_connect('localhost','root','','fb') or die('cannot connect mysql');
     }
-    
     public static function getInstance() {
-      if (!self::$instance) {
-        self::$instance = new ConnectDb();
+      if (!self::$_instance) {
+        self::$_instance = new connectDb();
       }
-      return self::$instance;
+      return self::$_instance;
     }
-
-    public function getConnection() {
-      $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->dbName) or die ('Không thể kết nối tới database');
-      return $this->conn;
+    public function getConnectDb() {
+      return $this->_connect;
     }
   }
 
-  $instance1 = ConnectDb::getInstance();
-  $conn1 = $instance1->getConnection();
-  var_dump($conn1);
+  $obj = connectDb::getInstance();
+  $connect = $obj-> getConnectDb();
+  print_r($connect);
 
-  $instance2 = clone $instance1;
-  $conn2 = $instance2->getConnection();
-  var_dump($conn2);
+  $obj1 = connectDb::getInstance();
+  $connect1 = $obj1-> getConnectDb();
+  print_r($connect1);
 ?>
