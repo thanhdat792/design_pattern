@@ -37,6 +37,7 @@
 	print_r($product->getStockItem());
 
 /*
+- aaaa
 - Dependency Inversion: Đây là một nguyên lý để thiết kế và viết code.
 - Inversion of Control: Đây là một design pattern được tạo ra để code có thể tuân thủ nguyên lý Dependency Inversion. Có nhiều cách hiện thực pattern này: ServiceLocator, Event, Delegate, … Dependency Injection là một trong các cách đó.
 - Dependency Injection: Đây là một cách để hiện thực Inversion of Control Pattern.Các module phụ thuộc (dependency) sẽ được inject vào module cấp cao.
